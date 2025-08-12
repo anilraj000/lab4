@@ -1,0 +1,34 @@
+import java.io.*;
+
+public class ReverseFileContent {
+    public static void main(String[] args) {
+        String inputFile = "input.txt";     
+        String outputFile = "output.txt";   
+
+        StringBuilder content = new StringBuilder();
+
+
+        try (FileReader fr = new FileReader(inputFile)) {
+            int ch;
+            while ((ch = fr.read()) != -1) {
+                content.append((char) ch);
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading file: " + inputFile);
+            e.printStackTrace();
+            return;
+        }
+
+        
+        content.reverse();
+
+       
+        try (FileWriter fw = new FileWriter(outputFile)) {
+            fw.write(content.toString());
+        } catch (IOException e) {
+            System.out.println("Error writing file: " + outputFile);
+            e.printStackTrace();
+        }
+
+        System.out.println("Reversed content written to " + outputFile);
+    }
