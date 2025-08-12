@@ -1,0 +1,36 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
+public class SortedProductNames {
+    public static void main(String[] args) {
+        ArrayList<String> products = new ArrayList<>();
+
+        try {
+            File file = new File("products.txt");
+            Scanner scanner = new Scanner(file);
+            scanner.useDelimiter(",");
+
+            while (scanner.hasNext()) {
+                String product = scanner.next().trim();
+                if (!product.isEmpty()) {
+                    products.add(product);
+                }
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("products.txt file not found!");
+            return;
+        }
+
+        
+        Collections.sort(products);
+
+        System.out.println("Sorted product names:");
+        for (String name : products) {
+            System.out.println(name);
+        }
+    }
+}
