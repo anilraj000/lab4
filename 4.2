@@ -1,0 +1,28 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class EvenNumbersFromFile {
+    public static void main(String[] args) {
+        try {
+            File file = new File("numbers.txt");
+            Scanner scanner = new Scanner(file);
+
+            scanner.useDelimiter(","); // Set comma as delimiter
+
+            System.out.println("Even numbers in numbers.txt:");
+            while (scanner.hasNext()) {
+                String numStr = scanner.next().trim(); // Get number as string and trim spaces
+                if (!numStr.isEmpty()) {
+                    int num = Integer.parseInt(numStr);
+                    if (num % 2 == 0) {
+                        System.out.println(num);
+                    }
+                }
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("numbers.txt file not found!");
+        }
+    }
+}
